@@ -23,4 +23,13 @@
     -> str("command")
     -> color() // reset to default color
     -> str(' - this is a description for command')
+    -> ln()
+    -> ln()
+
+    -> background(ConsoleFormatter::COLOR_YELLOW)
+    -> color(ConsoleFormatter::COLOR_RED)
+    -> str(" Esta lib está em desenvolvimento ") -> ln()
+    -> str(" Se gostou, você pode ajudar!!! ")
+    -> background() -> color()
+    -> ln()
     -> ln();
