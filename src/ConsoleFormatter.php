@@ -29,8 +29,7 @@ class ConsoleFormatter {
 
   /** scape char **/
   const SCAPE_CHAR = 0x1B;
-
-  const DEFAULT_COLOR = self::COLOR_WHITE;
+  const COLOR_RESET = "0";
 
   public $styles = [
     self::ST_RESET => 0,
@@ -73,16 +72,25 @@ class ConsoleFormatter {
     return chr(self::SCAPE_CHAR) . "[" . $this->mountColor($indexColor, $type, $strong) . "m";
   }
 
-  public function color ($color = self::DEFAULT_COLOR) {
-    /* reverse keys to values */
-    $flip = array_flip($this->colors);
-    return $this->str($this->resolveColor($flip[$color]));
+  private function getColorByName ($name = "") {
+    if (in_array($name, $this->colors)) {
+      $flip = array_flip($this->colors);
+      return $flip[$name];
+    }
+
+    return self::COLOR_RESET;
   }
 
-  public function background($color) {
+  public function color ($color = self::COLOR_WHITE) {
     /* reverse keys to values */
-    $flip = array_flip($this->colors);
-    return $this->str($this->resolveColor($flip[$color], 1));
+    $color = $this->getColorByName($color);
+    return $this->str($this->resolveColor($color));
+  }
+
+  public function background($color = "") {
+    /* reverse keys to values */
+    $color = $this->getColorByName($color);
+    return $this->str($this->resolveColor($color, 1));
   }
 
   public function str($string) {
