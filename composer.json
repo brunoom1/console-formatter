@@ -1,10 +1,14 @@
 {
     "name": "gabrielmendonca/console-formatter",
-    "version": "0.0.0",
+    "description": "Classe para trabalhar formatação de texto em console/linha de comando.",
+    "keywords": ["Console", "Command Line", "Linha de comando", "Formatar", "Formatar Texto", "Cmd", "Terminal"],
+    "homepage": "https://github.com/gabrielmendonca/console-formatter",
     "authors": [
         {
             "name": "Gabriel Mendonça",
-            "email": "gabrielmendoncanf@gmail.com"
+            "email": "gabrielmendoncanf@gmail.com",
+            "homepage": "http://gabrielmendonca.com",
+            "role": "Desenvolvedor Fullstack"
         }
     ],
     "autoload": {
@@ -13,6 +17,7 @@
       }
     },
     "require": {
+      "php": ">=7.2.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^8.3"
