@@ -2,7 +2,7 @@
     "name": "gabrielmendonca/console-formatter",
     "description": "Classe para trabalhar formatação de texto em console/linha de comando.",
     "keywords": ["Console", "Command Line", "Linha de comando", "Formatar", "Formatar Texto", "Cmd", "Terminal"],
-    "homepage": "https://github.com/gabrielmendonca/console-formatter",
+    "homepage": "https://github.com/brunoom1/console-formatter",
     "authors": [
         {
             "name": "Gabriel Mendonça",
