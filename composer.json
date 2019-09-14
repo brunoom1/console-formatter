@@ -24,5 +24,11 @@
     },
     "scripts": {
       "test": ".\\vendor\\bin\\phpunit.bat test\\"
+    },
+    "extra": {
+      "branch-alias": {
+        "dev-master": "master",
+        "dev-develop": "develop"
+      }
     }
 }
