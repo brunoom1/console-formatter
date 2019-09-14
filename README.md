@@ -12,8 +12,10 @@ No momento, você pode instalar a lib escolhendo uma destas opções.
 
 **Utilizando o Composer**
 ```bash
-composer require gabrielmendonca/console-formatter
+composer require gabrielmendonca/console-formatter:dev-master
 ```
+
+Onde **dev-master**, pode ser trocado por **dev-develop**, para pegar a última versão de desenvolvimento no branch develop
 
 **Fazendo o clone repositório no git**
 
