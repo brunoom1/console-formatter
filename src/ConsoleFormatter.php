@@ -59,6 +59,7 @@ class ConsoleFormatter {
    * @param int $type - value between [0,1] - Define 0 for foreground and 1
    * for background
    * @param boolean $strong - [true | false]
+   * @return int $color
    */
   private function mountColor (int $indexColor = 7, int $type = self::TYPE_FOREGROUND, bool $strong = false ) {
     $dec = 30;
@@ -68,10 +69,22 @@ class ConsoleFormatter {
     return $dec + $indexColor;
   }
 
+  /**
+   * Resolve code of color
+   * @param int $indexColor - inteiro que define a cor a ser atribuida
+   * @param int $type - inteiro que define qual o tipo, 0 - normal, 1 - background
+   * @param boolean $strong - verdadeiro ou falso
+   * @return string $string_formated_color
+   */
   private function resolveColor (int $indexColor = 7, int $type = 0, bool $strong = false) {
     return chr(self::SCAPE_CHAR) . "[" . $this->mountColor($indexColor, $type, $strong) . "m";
   }
 
+  /**
+   * Retorna o código de cor por nome
+   * @param string $name - nome da cor, para retornar o código
+   * @return int $codigoCor - código da cor passada ou cor de reset se não existir
+   */
   private function getColorByName ($name = "") {
     if (in_array($name, $this->colors)) {
       $flip = array_flip($this->colors);
@@ -81,18 +94,33 @@ class ConsoleFormatter {
     return self::COLOR_RESET;
   }
 
+  /**
+   * Adiciona cor para buffer
+   * @param string $colorName - nome da cor
+   * @return ConsoleFormatter
+   */
   public function color ($color = self::COLOR_WHITE) {
     /* reverse keys to values */
     $color = $this->getColorByName($color);
     return $this->str($this->resolveColor($color));
   }
 
+  /**
+   * Adicionar cor ao background
+   * @param string $colorName - nome da cor
+   * @return ConsoleFormatter
+   */
   public function background($color = "") {
     /* reverse keys to values */
     $color = $this->getColorByName($color);
     return $this->str($this->resolveColor($color, 1));
   }
 
+  /**
+   * Adicionar conteúdo ao buffer
+   * @param string $string - conteúdo para buffer
+   * @return ConsoleFormatter
+   */
   public function str($string) {
     $this->content .= $string;
     $this->current_line = $this->content;
@@ -105,6 +133,10 @@ class ConsoleFormatter {
     return $this;
   }
 
+  /**
+   * Criar separador de linha e adiciona no buffer
+   * @return ConsoleFormatter
+   */
   public function separatorStyle1 () {
     $str = "\n";
     for($i = 0; $i < strlen($this->current_line); $i++) {
@@ -117,14 +149,25 @@ class ConsoleFormatter {
     return $this;
   }
 
+  /**
+   * Adiciona quebra de linha ao buffer
+   * @return ConsoleFormatter
+   */
   public function ln() {
     return $this->str("\n");
   }
 
+  /**
+   * Adiciona tab ao buffer
+   * @return ConsoleFormatter
+   */
   public function tab() {
     return $this->str('  ');
   }
 
+  /**
+   * Retorna string formatada
+   */
   public function __toString () {
     return $this->content;
   }
