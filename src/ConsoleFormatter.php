@@ -3,9 +3,7 @@ namespace gabrielmendonca;
 
 class ConsoleFormatter {
 
-  private $count_line = 0;
-  private $content = "";
-  private $current_line = "";
+  private $lines = [];
 
   /** styles **/
   const ST_RESET = 'reset';
@@ -49,8 +47,8 @@ class ConsoleFormatter {
     self::COLOR_WHITE
   ];
 
-  public function __constructor () {
-    $this->content = "";
+  public function __construct () {
+    $this->lines[] = "";
   }
 
   /**
@@ -122,14 +120,14 @@ class ConsoleFormatter {
    * @return ConsoleFormatter
    */
   public function str($string) {
-    $this->content .= $string;
-    $this->current_line = $this->content;
+
+    $total_lines = count($this->lines);
+    $this->lines[$total_lines - 1] .= $string;
 
     if(strstr($string, "\n") !== false) {
       // has searched new line
-      $this->current_line = '';
+      array_push($this->lines, "");
     }
-
     return $this;
   }
 
@@ -138,8 +136,11 @@ class ConsoleFormatter {
    * @return ConsoleFormatter
    */
   public function separatorStyle1 () {
+
+    $current_line = count($this->lines) - 1;
+
     $str = "\n";
-    for($i = 0; $i < strlen($this->current_line); $i++) {
+    for($i = 0; $i < strlen($this->lines[$current_line]); $i++) {
       $str .= "=";
     }
     $str .= "\n";
@@ -169,7 +170,11 @@ class ConsoleFormatter {
    * Retorna string formatada
    */
   public function __toString () {
-    return $this->content;
+    $content = "";
+    foreach($this->lines as $line){
+      $content .= $line;
+    }
+    return $content;
   }
 
 }
