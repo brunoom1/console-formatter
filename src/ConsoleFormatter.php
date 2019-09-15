@@ -5,6 +5,15 @@ class ConsoleFormatter {
 
   private $lines = [];
 
+  /**
+   * Guarda referência para as linhas onde serão colocados os separadores
+   */
+  private $separator_lines = [];
+  /**
+   * Guarda o caracter utilizado para separador
+   */
+  private $separator_line_char = [];
+
   /** styles **/
   const ST_RESET = 'reset';
   const ST_BOLD = 'bold';
@@ -135,17 +144,18 @@ class ConsoleFormatter {
    * Criar separador de linha e adiciona no buffer
    * @return ConsoleFormatter
    */
-  public function separatorStyle1 () {
+  public function separator ($separator_char = "=") {
 
     $current_line = count($this->lines) - 1;
 
-    $str = "\n";
-    for($i = 0; $i < strlen($this->lines[$current_line]); $i++) {
-      $str .= "=";
-    }
-    $str .= "\n";
+    $this->str("\n");
+    $count_line = count($this->lines) - 1;
+    $this->str("\n");
+    $this->str("\n");
 
-    $this->str($str);
+    // grava a referência
+    $this->separator_lines[] = &$this->lines[$count_line];
+    $this->separator_line_char[] = $separator_char;
 
     return $this;
   }
@@ -166,14 +176,36 @@ class ConsoleFormatter {
     return $this->str('  ');
   }
 
+  private function maxLineString () {
+    $max = 0;
+    foreach($this->lines as $line) {
+      $totalLine = strlen($line);
+
+      if ($totalLine > $max) {
+        $max = $totalLine;
+      }
+    }
+    return $max;
+  }
+
   /**
    * Retorna string formatada
    */
   public function __toString () {
+
+    // Add separator
+    $maxLineString = $this->maxLineString();
+    for($i = 0; $i < count($this->separator_lines); $i++) {
+      for ($n = 0; $n < $maxLineString; $n++) {
+        $this->separator_lines[$i] .= $this->separator_line_char[$i];
+      }
+    }
+
     $content = "";
     foreach($this->lines as $line){
       $content .= $line;
     }
+
     return $content;
   }
 

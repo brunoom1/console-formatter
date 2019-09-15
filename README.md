@@ -27,7 +27,7 @@ git clone https://github.com/brunoom1/console-formatter.git
 - str (**String** $content) - ***Conteúdo a ser apresentado***
 - color (**Integer** $color) - ***Adiciona uma cor ao texto no console***
 - background (**Integer** $color) - ***Adiciona uma cor ao fundo do console***
-- separatorStyle1() - ***Adicionar um separador de linha***
+- separator($char = "=") - ***Adicionar um separador de linha***
 - ln() - ***Pula para uma nova linha***
 - tab() - ***Adicionar um tab a linha atual***
 
@@ -43,7 +43,7 @@ git clone https://github.com/brunoom1/console-formatter.git
     -> ln()
     -> str(" >>> Hello, i'm a command line helper <<<")
     -> color(ConsoleFormatter::COLOR_RED)
-    -> separatorStyle1()
+    -> separator()
     -> color() // reset to default color
 
     -> tab ()
