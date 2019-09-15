@@ -6,10 +6,13 @@
   $formatter = new ConsoleFormatter();
   echo $formatter
     -> ln()
+    -> ln()
     -> str(" >>> Hello, i'm a command line helper <<<")
+    -> ln()
     -> color(ConsoleFormatter::COLOR_RED)
-    -> separatorStyle1()
+    -> separator()
     -> color() // reset to default color
+    -> ln()
 
     -> tab ()
     -> color(ConsoleFormatter::COLOR_YELLOW)
@@ -23,6 +26,9 @@
     -> str("command")
     -> color() // reset to default color
     -> str(' - this is a description for command')
+    -> str(' - extend size of text ')
+    -> separator('-')
+
     -> ln()
     -> ln()
 
