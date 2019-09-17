@@ -31,6 +31,31 @@ git clone https://github.com/brunoom1/console-formatter.git
 - ln() - ***Pula para uma nova linha***
 - tab() - ***Adicionar um tab a linha atual***
 
+## Constantes de cor
+```php
+COLOR_BLACK = 'black';
+COLOR_RED = 'red';
+COLOR_GREEN = 'green';
+COLOR_YELLOW = 'yellow';
+COLOR_BLUE = 'blue';
+COLOR_MAGENTA = 'magenta';
+COLOR_CYAN = 'cyan';
+COLOR_WHITE = 'white';
+```
+
+
+```php
+<?php
+
+$cf = new ConsoleFormatter();
+$cf->color(ConsoleFormatter::COLOR_RED)
+  -> str("Texto em vermelho")
+  -> ln()
+  -> background(ConsoleFormatter::COLOR_YELLOW)
+  -> str("Texto em vermelho e fundo yellow");
+
+?>
+```
 ## Uso
 ```php
 <?php
