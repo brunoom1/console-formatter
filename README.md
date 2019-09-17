@@ -61,7 +61,7 @@ $cf->color(ConsoleFormatter::COLOR_RED)
 <?php
   require dirname(__FILE__) . '/vendor/autoload.php';
 
-  use gabrielmendonca\ConsoleFormatter;
+  use GabrielMendonca\ConsoleFormatter;
 
   $formatter = new ConsoleFormatter();
   echo $formatter

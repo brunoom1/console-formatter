@@ -1,5 +1,5 @@
 <?php
-namespace gabrielmendonca;
+namespace GabrielMendonca;
 
 class ConsoleFormatter {
 
