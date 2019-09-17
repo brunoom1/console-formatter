@@ -36,7 +36,7 @@ git clone https://github.com/brunoom1/console-formatter.git
 <?php
   require dirname(__FILE__) . '/vendor/autoload.php';
 
-  use gabrielmendonca\ConsoleFormatter;
+  use GabrielMendonca\ConsoleFormatter;
 
   $formatter = new ConsoleFormatter();
   echo $formatter
