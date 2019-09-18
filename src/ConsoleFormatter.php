@@ -129,15 +129,20 @@ class ConsoleFormatter {
    * @return ConsoleFormatter
    */
   public function str($string) {
-
-    $total_lines = count($this->lines);
-    $this->lines[$total_lines - 1] .= $string;
-
-    if(strstr($string, "\n") !== false) {
-      // has searched new line
-      array_push($this->lines, "");
+    if (strstr("\n", $string) !== false) {
+      throw new \Exception("Não use quebra de linha, utilize o método ln()", 1);
+    } else {
+      $this->addContent($string);
     }
     return $this;
+  }
+
+  public function addContent ($str = "", $newline = false) {
+    if (!$newline) {
+      $this->lines[$this->getLastLine()] .= $str;
+    } else {
+      $this->lines[] = $str;
+    }
   }
 
   /**
@@ -148,13 +153,10 @@ class ConsoleFormatter {
 
     $current_line = count($this->lines) - 1;
 
-    $this->str("\n");
-    $count_line = count($this->lines) - 1;
-    $this->str("\n");
-    $this->str("\n");
+    $this->ln();  // linha do separador
 
     // grava a referência
-    $this->separator_lines[] = &$this->lines[$count_line];
+    $this->separator_lines[] = &$this->lines[$this->getLastLine()];
     $this->separator_line_char[] = $separator_char;
 
     return $this;
@@ -165,16 +167,29 @@ class ConsoleFormatter {
    * @return ConsoleFormatter
    */
   public function ln() {
-    return $this->str("\n");
+    $this->addContent('', true);
+    return $this;
   }
+
 
   /**
    * Adiciona tab ao buffer
    * @return ConsoleFormatter
    */
-  public function tab() {
-    return $this->str('  ');
+  public function tab($size = 2) {
+    $str = '';
+    for($i = 0; $i < $size; $i ++) {
+      $str .= " ";
+    }
+    return $this->str($str);
   }
+
+
+  private function getLastLine() {
+    $lines = count($this->lines);
+    return $lines - 1;
+  }
+
 
   private function maxLineString () {
     $max = 0;
@@ -195,17 +210,21 @@ class ConsoleFormatter {
 
     // Add separator
     $maxLineString = $this->maxLineString();
+
     for($i = 0; $i < count($this->separator_lines); $i++) {
+      $str_separator = "";
       for ($n = 0; $n < $maxLineString; $n++) {
-        $this->separator_lines[$i] .= $this->separator_line_char[$i];
+        $str_separator .= $this->separator_line_char[$i];
       }
+      $this->separator_lines[$i] = $str_separator;
     }
+
 
     $content = "";
     foreach($this->lines as $line){
       $content .= $line;
+      $content .= "\n";
     }
-
     return $content;
   }
 
