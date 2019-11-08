@@ -29,7 +29,7 @@ git clone https://github.com/brunoom1/console-formatter.git
 - background (**Integer** $color) - ***Adiciona uma cor ao fundo do console***
 - separator($char = "=") - ***Adicionar um separador de linha***
 - ln() - ***Pula para uma nova linha***
-- tab() - ***Adicionar um tab a linha atual***
+- tab(size=2) - ***Adicionar um tab a linha atual*** - o padrão do size é 2. Essa função adiciona espaços e não tab.
 
 ## Constantes de cor
 ```php
